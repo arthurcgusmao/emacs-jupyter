@@ -1509,17 +1509,17 @@ value."
                     :code str
                     :store-history jupyter-repl-echo-eval-p))
         (if jupyter-repl-echo-eval-p
-            (jupyter-repl-replace-cell-code cell-previous-code))))
-    ;; Add callbacks to display evaluation output in pop-up buffers either when
-    ;; we aren't copying the input to a REPL cell or, if we are, when the REPL
-    ;; buffer isn't visible.
-    ;;
-    ;; Make sure we do this in the original buffer where STR originated from
-    ;; when BEG and END are non-nil.
-    (prog1 req
-      (unless (and jupyter-repl-echo-eval-p
-                   (get-buffer-window nil 'visible))
-        (jupyter-eval-add-callbacks req beg end)))))
+            (jupyter-repl-replace-cell-code cell-previous-code)))
+      ;; Add callbacks to display evaluation output in pop-up buffers either when
+      ;; we aren't copying the input to a REPL cell or, if we are, when the REPL
+      ;; buffer isn't visible.
+      ;;
+      ;; Make sure we do this in the original buffer where STR originated from
+      ;; when BEG and END are non-nil.
+      (prog1 req
+        (unless (and jupyter-repl-echo-eval-p
+                     (get-buffer-window nil 'visible))
+          (jupyter-eval-add-callbacks req beg end))))))
 
 ;;; Kernel management
 
