@@ -1825,7 +1825,9 @@ VERBOSE has the same meaning as in
       ;; `font-lock-extend-region-functions' is used since an input cell always
       ;; starts at the beginning of a line and ends at the end of a line and
       ;; does not use the font-lock-multiline property (2018-12-20).
-      (funcall fontify-fun (point-min) (point-max) verbose)
+      (save-restriction
+        (unless font-lock-dont-widen (widen))
+        (funcall fontify-fun (point-min) (point-max) verbose))
     ;; Unfontify the region mainly to remove the font-lock-multiline property
     ;; in the output, e.g. added by markdown.  These regions will get
     ;; highlighted syntactically in some scenarios.
